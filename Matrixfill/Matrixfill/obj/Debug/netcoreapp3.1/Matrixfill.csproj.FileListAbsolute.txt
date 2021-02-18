@@ -1,0 +1,11 @@
+C:\Users\1395258\source\repos\Matrixfill\Matrixfill\bin\Debug\netcoreapp3.1\Matrixfill.exe
+C:\Users\1395258\source\repos\Matrixfill\Matrixfill\bin\Debug\netcoreapp3.1\Matrixfill.deps.json
+C:\Users\1395258\source\repos\Matrixfill\Matrixfill\bin\Debug\netcoreapp3.1\Matrixfill.runtimeconfig.json
+C:\Users\1395258\source\repos\Matrixfill\Matrixfill\bin\Debug\netcoreapp3.1\Matrixfill.runtimeconfig.dev.json
+C:\Users\1395258\source\repos\Matrixfill\Matrixfill\bin\Debug\netcoreapp3.1\Matrixfill.dll
+C:\Users\1395258\source\repos\Matrixfill\Matrixfill\bin\Debug\netcoreapp3.1\Matrixfill.pdb
+C:\Users\1395258\source\repos\Matrixfill\Matrixfill\obj\Debug\netcoreapp3.1\Matrixfill.csprojAssemblyReference.cache
+C:\Users\1395258\source\repos\Matrixfill\Matrixfill\obj\Debug\netcoreapp3.1\Matrixfill.AssemblyInfoInputs.cache
+C:\Users\1395258\source\repos\Matrixfill\Matrixfill\obj\Debug\netcoreapp3.1\Matrixfill.AssemblyInfo.cs
+C:\Users\1395258\source\repos\Matrixfill\Matrixfill\obj\Debug\netcoreapp3.1\Matrixfill.dll
+C:\Users\1395258\source\repos\Matrixfill\Matrixfill\obj\Debug\netcoreapp3.1\Matrixfill.pdb
