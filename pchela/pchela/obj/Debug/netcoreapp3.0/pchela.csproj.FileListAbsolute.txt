@@ -1,0 +1,11 @@
+C:\Users\TEMP.FREE.000\source\repos\pchela\pchela\bin\Debug\netcoreapp3.0\pchela.exe
+C:\Users\TEMP.FREE.000\source\repos\pchela\pchela\bin\Debug\netcoreapp3.0\pchela.deps.json
+C:\Users\TEMP.FREE.000\source\repos\pchela\pchela\bin\Debug\netcoreapp3.0\pchela.runtimeconfig.json
+C:\Users\TEMP.FREE.000\source\repos\pchela\pchela\bin\Debug\netcoreapp3.0\pchela.runtimeconfig.dev.json
+C:\Users\TEMP.FREE.000\source\repos\pchela\pchela\bin\Debug\netcoreapp3.0\pchela.dll
+C:\Users\TEMP.FREE.000\source\repos\pchela\pchela\bin\Debug\netcoreapp3.0\pchela.pdb
+C:\Users\TEMP.FREE.000\source\repos\pchela\pchela\obj\Debug\netcoreapp3.0\pchela.csprojAssemblyReference.cache
+C:\Users\TEMP.FREE.000\source\repos\pchela\pchela\obj\Debug\netcoreapp3.0\pchela.AssemblyInfoInputs.cache
+C:\Users\TEMP.FREE.000\source\repos\pchela\pchela\obj\Debug\netcoreapp3.0\pchela.AssemblyInfo.cs
+C:\Users\TEMP.FREE.000\source\repos\pchela\pchela\obj\Debug\netcoreapp3.0\pchela.dll
+C:\Users\TEMP.FREE.000\source\repos\pchela\pchela\obj\Debug\netcoreapp3.0\pchela.pdb
