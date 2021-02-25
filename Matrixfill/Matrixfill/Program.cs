@@ -3,31 +3,32 @@ using System.Collections.Generic;
 
 namespace Matrixfill
 {
-    class Program
+    
+    public class Program
     {
         static int[,] max;
-        static Stack<int[]> stack = new Stack<int[]>();
+        public static MyStack<KeyValuePair<int, int>> stack = new MyStack<KeyValuePair<int, int>>();
         static void Main(string[] args)
         {
             int p = 10;
             max = new int[p, p];
             Console.WriteLine("Изначальное");
             Create(p);
-            Show(max);
+            //Show(max);
             Schet(max);
-            Console.WriteLine("Заливка");
-            fill(2, 2, max);
-            Show(max);
-            Schet(max);
+            //Console.WriteLine("Заливка");
+            //Fill(2, 2, max);
+            //Show(max);
+            //Schet(max);
             Console.WriteLine("Непонятные стеки");
-            stackk(2, 2, max);
-            Show(max);
+            Stackk(3, 2, max);
+            //Show(max);
             Schet(max);
         }
         public static void Create(int p)
         {
             max = new int[p, p];
-            Random hate = new Random();
+            Random hate = new Random(2);
             for (int i = 0; i < p; i++)
             {
                 for (int j = 0; j < p; j++)
@@ -53,41 +54,41 @@ namespace Matrixfill
             }
             Console.WriteLine();
         }
-        public static void fill(int x, int y, int[,] max)
+        public static void Fill(int x, int y, int[,] max)
         {
             const int c = 2;
             if (x >= 0 && y >= 0 && x < max.GetLength(0) && y < max.GetLength(0) && max[x, y] == 0)
             {
                 max[x, y] = c;
-                fill(x + 1, y, max);
-                fill(x - 1, y, max);
-                fill(x, y + 1, max);
-                fill(x, y - 1, max);
+                Fill(x + 1, y, max);
+                Fill(x - 1, y, max);
+                Fill(x, y + 1, max);
+                Fill(x, y - 1, max);
             }
 
         }
 
-        public static void stackk(int x, int y, int[,] max)
+        public static void Stackk(int x, int y, int[,] max)
         {
             const int c = 2;
-            stack.Push(new[] { x, y });
-            while(stack.Count>0)
+            stack.Push(new KeyValuePair<int, int>(x, y));
+            while (stack.Count > 0)
             {
-                int[] st = stack.Pop();
-                if (st[0] >= 0 && st[1] >= 0 && st[0] < max.GetLength(0) &&
-                    st[1] < max.GetLength(0) &&
-                    max[st[0], st[1]] == 0)
+                var st = stack.Pop();
+                if (st.Key >= 0 && st.Value >= 0 && st.Key < max.GetLength(0) &&
+                    st.Value < max.GetLength(0) &&
+                    max[st.Key, st.Value] == 0)
                 {
-                    max[st[0], st[1]] = c;
-                    stack.Push(new[] { st[0], st[1] - 1 });
-                    stack.Push(new[] { st[0] - 1, st[1] });
-                    stack.Push(new[] { st[0], st[1] + 1 });
-                    stack.Push(new[] { st[0] + 1, st[1] });
+                    max[st.Key, st.Value] = c;
+                    stack.Push(new KeyValuePair<int, int>(st.Key, st.Value - 1));
+                    stack.Push(new KeyValuePair<int, int>(st.Key - 1, st.Value));
+                    stack.Push(new KeyValuePair<int, int>(st.Key, st.Value + 1));
+                    stack.Push(new KeyValuePair<int, int>(st.Key + 1, st.Value));
                 }
             }
         }
-       
-            static void Schet(int[,] matrix)
+
+        static void Schet(int[,] matrix)
         {
             int a1 = 0;
             int b2 = 0;
