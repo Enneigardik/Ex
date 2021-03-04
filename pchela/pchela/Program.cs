@@ -1,30 +1,31 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace vectora
 {
     class MyVector<T>
     {
-        private T[] data;
-        public int size;
-        public T this[int key]
+        int size = 0;
+        T[] data = new T[0];
+        public T this[int n]
         {
             get
             {
-                return data[key];
-            }
-            set
-            {
-                data[key] = value;
+                if (n < 0 || n > size)
+                {
+                    throw new IndexOutOfRangeException("Я ЗАПРЕЩАЮ ВАМ ТУТ ТРОГАТЬ");
+                }
+                return data[n];
             }
         }
 
-        public int Count
+        public int Count()
         {
-            get
-            {
-                return size;
-            }
+            return size;
+        }
+        public bool IsEmpty()
+        {
+            return size == 0;
         }
 
         public void Add(T x)
@@ -32,9 +33,31 @@ namespace vectora
             Array.Resize(ref data, ++size);
             data[size - 1] = x;
         }
-        public T Insert(T x, int numer)
+
+        public void Insert(int x, T numer)
         {
-           
+            if (x < 0)
+            {
+                throw new IndexOutOfRangeException("А как");
+            }
+            if (x > size)
+            {
+                size += x;
+                Array.Resize(ref data, size);
+                data[x] = numer;
+            }
+            else if (x == size)
+            {
+                data[x] = numer;
+            }
+            else if (x < size)
+            {
+                size++;
+                Array.Resize(ref data, size);
+                for (int i = size - 1; i > x; i--)
+                    data[i] = data[i - 1];
+                data[x] = numer;
+            }
         }
         public T RemoveAt(int numer)
         {
@@ -47,8 +70,8 @@ namespace vectora
             }
             return default;
         }
-
-        public T Last()
+        
+        public T Lastl()
         {
             if (size != 0)
             {
@@ -59,6 +82,7 @@ namespace vectora
                 return default(T);
             }
         }
+
         public T First()
         {
             if (size != 0)
@@ -84,12 +108,15 @@ namespace vectora
     class Program
     {
 
-        public static MyVector<List<int>> vect = new MyVector<List<int>>();
+        public static MyVector<int> hate = new MyVector<int>();
         static void Main(string[] args)
         {
-            List<int> AAA = new List<int>();
-
-
+            hate.Add(2);
+            Console.Write(hate[0]);
+            hate.Insert(5, 5);
+            hate.Insert(-5, -5);
+            Console.WriteLine(hate[5]);
+           
         }
 
     }
