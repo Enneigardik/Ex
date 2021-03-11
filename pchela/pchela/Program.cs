@@ -12,7 +12,7 @@ namespace Galko
             y = b;
         }
     }
-    public class MyComp:IComparer<Keyval>
+    public class MyComp : IComparer<Keyval>
     {
         public int Compare(Keyval l, Keyval r)
         {
@@ -22,104 +22,115 @@ namespace Galko
 
     class MyVector<T>
     {
-        int size = 0;
-        T[] data = new T[0];
+        public int Count => size;
+        public bool IsEmpty => size == 0;
+
+        private int size = 0;
+        private T[] data = new T[0];
+        
         public T this[int n]
         {
             get
             {
                 if (n < 0 || n > size)
-                {
                     throw new IndexOutOfRangeException("Я ЗАПРЕЩАЮ ВАМ ТУТ ТРОГАТЬ");
-                }
                 return data[n];
+            }
+            set
+            {
+
+                if (n < 0 || n > size)
+                    throw new IndexOutOfRangeException("Я ЗАПРЕЩАЮ ВАМ ТУТ ТРОГАТЬ");
+                data[n] = value;
             }
         }
 
-        public int Count()
-        {
-            return size;
-        }
-        public bool IsEmpty()
-        {
-            return size == 0;
-        }
 
         public void Add(T x)
         {
-            Array.Resize(ref data, ++size);
+            Resize(++size);
             data[size - 1] = x;
         }
 
         public void Insert(int x, T numer)
         {
             if (x < 0)
-            {
                 throw new IndexOutOfRangeException("А как");
-            }
             if (x > size)
             {
-                size += x;
-                Array.Resize(ref data, size);
+                Resize(x + 1);
                 data[x] = numer;
             }
-            else if (x == size)
-            {
-                data[x] = numer;
-            }
-            else if (x < size)
+            else
             {
                 size++;
-                Array.Resize(ref data, size);
+                Resize(size);
                 for (int i = size - 1; i > x; i--)
                     data[i] = data[i - 1];
                 data[x] = numer;
             }
         }
+
         public T RemoveAt(int numer)
         {
             if (size != 0)
             {
-
                 var t = data[numer];
-                Array.Resize(ref data, --size);
+                for (int i = numer+1; i < size; i++)
+                    data[i - 1] = data[i];
+                Resize(--size);
                 return t;
             }
             return default;
         }
 
-        public T Last()
-        {
-            if (size != 0)
-            {
-                return data[size - 1];
-            }
-            else
-            {
-                return default(T);
-            }
-        }
+        public T Last() =>
+            size != 0 ? data[size - 1] : default;
 
-        public T First()
-        {
-            if (size != 0)
-            {
-                return data[0];
-            }
-            else
-            {
-                return default(T);
-            }
-        }
+        public T First() =>
+            size != 0 ? data[0] : default;
 
         public void Clear()
         {
             size = 0;
             data = new T[0];
         }
-        bool Contains(T item)
+        public bool Contains(T item) =>
+            IndexOf(item) != -1;
+        public int IndexOf(T item)
         {
+            for (int i=0; i<size; i++)
+                if (object.Equals(item, data[i]))
+                    return i;
+            return -1;
+        }
+        public IEnumerator<T> GetEnumerator() =>
+            data.GetEnumerator() as IEnumerator<T>;
 
+        public void ForEach(Action<T> action)
+        {
+            for(int i = 0; i < size; i++)
+                action(data[i]);
+        }
+        public T Find(Predicate<T> match)
+        {
+            for (int i = 0; i < size; i++)
+                if (match(data[i]))
+                    return data[i];
+            return default;
+        }
+        public int FindIndex(Predicate<T> match)
+        {
+            for (int i = 0; i < size; i++)
+                if (match(data[i]))
+                    return i;
+            return -1;
+        }
+        private void Resize(int newSize)
+        {
+            newSize = (int) Math.Pow(2, Math.Ceiling(Math.Log2(newSize)));
+            if (newSize != data.Length)
+                Array.Resize(ref data, newSize);  
         }
     }
 
@@ -131,6 +142,15 @@ namespace Galko
         public static MyVector<int> hate = new MyVector<int>();
         static void Main(string[] args)
         {
+            hate.Add(1);
+            hate.Insert(0, 2);
+            hate.Add(4);
+            hate.ForEach(i => Console.Write(i + " "));
+            hate.Add(5);
+            hate.Add(8);
+            Console.WriteLine();
+            hate.ForEach(i => Console.Write(i + " "));
+            Console.WriteLine(hate.Contains(1));
             //f sq = x => x * x;
             //Console.WriteLine(sq(5));
             //g sum = (x, y) => x + y;
