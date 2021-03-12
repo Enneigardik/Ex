@@ -1,56 +1,103 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Text;
-
-namespace Matrixfill
+namespace Galko
 {
-    public class MyStack<T>
+    class Program
     {
-        private T[] data;
-        public int Count;
-
-       public MyStack()
+        public class Node
         {
-            Count = 0;
-            data = new T[0];
-        }
-        public void Push(T x)
-        {
-            Array.Resize(ref data, ++Count);
-            data[Count - 1] = x;
-        }
-
-        public T Pop()
-        {
-            if (Count != 0)
+            public int data;
+            public Node next;
+            public Node (int x)
             {
-                var t = data[Count-1];
-                Array.Resize(ref data, --Count);
-                return t;
-            }
-            return default;
-        }
-
-        public T Peek()
-        {
-            if (Count != 0)
-            {
-                return data[Count - 1];
-            }
-            else
-            {
-                return default(T);
+                this.data = x;
+                this.next = null;
             }
         }
-        public bool isEmpty()
+        public class SLList
         {
-            return Count == 0;
+            public Node head;
+            public Node tail;
+            public int size = 0;
+            public int this[int index]
+            {
+                get
+                {
+                    return GetValue(index);
+                }
+                set
+                {
+
+                }
+            }
+            public int GetValue(int p)
+            {
+                var curr = head;
+                for(int i = 0; i<p && curr!=null; i++)
+                {
+                    curr = curr.next;
+                }
+                return curr.data;
+            }
+            public SLList()
+            {
+                head = null;
+                tail = head;
+                size = 0;
+
+            }
+            public IEnumerator<int> GetEnumerator()
+            {
+                for (int i=0; i<size;i++)
+                {
+                    return  GetValue(i);
+                }
+            }
+            public void AddFirst(int x)
+            {
+                ++size;
+                var newNode = new Node(x);
+                if (head == null)
+                {
+                    //head = newNode;
+                    //tail = head;
+                }
+                else
+                {
+                    newNode.next = head;
+                    head = newNode;
+                }
+                public void AddLast(int x)
+            {
+                ++size;
+                var newNode = new Node(x);
+                if (head == null)
+                {
+                    head = newNode;
+                    tail = head;
+                }
+                else
+                {
+                    var t = tail;
+                    t.next = newNode;
+                    tail = newNode;
+                }
+               // tail.next = newNode;
+                //tail = newNode;
+            }
         }
-        public void Clear()
+        static void Main(string[] args)
         {
-            Count = 0;
-            data = new T[0];
+            var list = new SLList();
+            list.AddLast(9);
+            list.AddLast(1);
+            list.AddLast(2);
+            list.AddLast(3);
+            for (int i =0; i<list.size; i++)
+            {
+                Console.Write(list[i] + "=>");
+            }
+            Console.WriteLine("null");
         }
     }
-
 }
