@@ -1,0 +1,11 @@
+C:\Users\GTS.19\source\repos\xtoya\xtoya\bin\Debug\netcoreapp3.0\xtoya.exe
+C:\Users\GTS.19\source\repos\xtoya\xtoya\bin\Debug\netcoreapp3.0\xtoya.deps.json
+C:\Users\GTS.19\source\repos\xtoya\xtoya\bin\Debug\netcoreapp3.0\xtoya.runtimeconfig.json
+C:\Users\GTS.19\source\repos\xtoya\xtoya\bin\Debug\netcoreapp3.0\xtoya.runtimeconfig.dev.json
+C:\Users\GTS.19\source\repos\xtoya\xtoya\bin\Debug\netcoreapp3.0\xtoya.dll
+C:\Users\GTS.19\source\repos\xtoya\xtoya\bin\Debug\netcoreapp3.0\xtoya.pdb
+C:\Users\GTS.19\source\repos\xtoya\xtoya\obj\Debug\netcoreapp3.0\xtoya.csprojAssemblyReference.cache
+C:\Users\GTS.19\source\repos\xtoya\xtoya\obj\Debug\netcoreapp3.0\xtoya.AssemblyInfoInputs.cache
+C:\Users\GTS.19\source\repos\xtoya\xtoya\obj\Debug\netcoreapp3.0\xtoya.AssemblyInfo.cs
+C:\Users\GTS.19\source\repos\xtoya\xtoya\obj\Debug\netcoreapp3.0\xtoya.dll
+C:\Users\GTS.19\source\repos\xtoya\xtoya\obj\Debug\netcoreapp3.0\xtoya.pdb
