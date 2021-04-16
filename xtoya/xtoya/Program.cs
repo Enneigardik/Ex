@@ -14,7 +14,7 @@ namespace SAOD6
         public event EventHandler OnEdit;
 
         private BadTreeNode<T> root { get => _root; set { _root = value; UpdateState(); } }
-        private BadTreeNode<T> _root;
+        public BadTreeNode<T> _root;
         //BadTreeNode<int> rooot;
         public void Add(T value)
         {
@@ -63,10 +63,10 @@ namespace SAOD6
         {
             var nodes = new List<BadTreeNode<T>>();
             store(nodes, p);
-            return build_ideal(nodes, 0, nodes.Count-1);
+            return build_ideal(nodes, 0, nodes.Count - 1);
         }
 
-        private void store(List<BadTreeNode<T>> n,BadTreeNode<T> p)
+        private void store(List<BadTreeNode<T>> n, BadTreeNode<T> p)
         {
             if (p == null)
                 return;
@@ -77,34 +77,80 @@ namespace SAOD6
 
         public string Print()
         {
-            return to_string(root).Value;
+            var res = ToStringHelper(root).Value;
+            return res;
         }
-        
-        public KeyValuePair<int, string> to_string(BadTreeNode<T> p)
+
+        private KeyValuePair<int, string> ToStringHelper(BadTreeNode<T> n)
         {
-            if (p == null)
+            if (n == null)
                 return new KeyValuePair<int, string>(1, "\n");
-            var left = to_string(p.Left);
-            var right = to_string(p.Right);
-            var obj = p.Value.ToString();
-            var str = new StringBuilder();
-            str.Append(' ', left.Key - 1);
-            str.Append(obj);
-            str.Append(' ', right.Key - 1);
-            str.Append("\n");
+
+            var left = ToStringHelper(n.Left);
+            var right = ToStringHelper(n.Right);
+
+            var objString = n.Value.ToString();
+            var stringBuilder = new StringBuilder();
+
+            stringBuilder.Append(' ', left.Key - 1);
+            stringBuilder.Append(objString);
+            stringBuilder.Append(' ', right.Key - 1);
+            stringBuilder.Append('\n');
+
             var i = 0;
-            while(i * left.Key<left.Value.Length && i * right.Key<right.Value.Length)
+            while (i * left.Key < left.Value.Length && i * right.Key < right.Value.Length)
             {
-                str.Append(left.Value, i * left.Key, left.Key - 1);
-                str.Append(right.Value, i * right.Key, right.Key);
+                stringBuilder.Append(left.Value, i * left.Key, left.Key - 1);
+                stringBuilder.Append(' ', objString.Length);
+                stringBuilder.Append(right.Value, i * right.Key, right.Key);
                 ++i;
             }
-            while(i*left.Key<left.Lenght)
-            {
 
+            while (i * left.Key < left.Value.Length)
+            {
+                stringBuilder.Append(left.Value, i * left.Key, left.Key - 1);
+                stringBuilder.Append(' ', objString.Length + right.Key - 1);
+                stringBuilder.Append('\n');
+
+                ++i;
             }
 
+            while (i * right.Key < right.Value.Length)
+            {
+                stringBuilder.Append(' ', left.Key + objString.Length - 1);
+                stringBuilder.Append(right.Value, i * right.Key, right.Key);
+                ++i;
+            }
+            return new KeyValuePair<int, string>(left.Key + objString.Length + right.Key - 1, stringBuilder.ToString());
         }
+
+        public BadTreeNode<T> Rrot(BadTreeNode<T> r)
+        {
+            var p = r.Left;
+            r.Left = p.Right;
+            p.Right = r;
+            return p;
+        }
+        public BadTreeNode<T> Lrot(BadTreeNode<T> r)
+        {
+            var p = r.Right;
+            r.Right = p.Left;
+            p.Left = r;
+            return p;
+        }
+        public BadTreeNode<T> BRrot(BadTreeNode<T> r)
+        {
+            var p = r.Left;
+            r.Left = Lrot(p);
+            return Rrot(r);
+        }
+        public BadTreeNode<T> BLrot(BadTreeNode<T> r)
+        {
+            var p = r.Right;
+            r.Right = Rrot(p);
+            return Lrot(r);
+        }
+
         public int GetHeight()
         {
             return geth(root);
@@ -205,7 +251,7 @@ namespace SAOD6
     //        this.item = item;
     //    }
     //}
-    
+
     public class BadTreeNode<T> where T : IComparable
     {
         public BadTreeNode<T> Left, Right;
@@ -217,31 +263,45 @@ namespace SAOD6
     {
         static void Main(string[] args)
         {
+            //var list = new BadTree<int>();
+            //list.Add(5);
+            //list.Add(3);
+            //list.Add(2);
+            //list.Add(4);
+            //list.Add(7);
             var list = new BadTree<int>();
-            list.Add(1);
-            list.Add(2);
-            list.Add(3);
             list.Add(4);
-            list.Add(5);
-            list.Add(6);
-            list.Add(7);
-            list.Add(8);
+            list.Add(1);
             list.Add(9);
+            list.Add(6);
             list.Add(10);
-            //list.print();
+            list.Add(7);
+            list.Add(5);
+            Console.WriteLine(list.Print());
             Console.WriteLine();
-            Console.WriteLine(list.TreeHeight);
-            Console.WriteLine(string.Join(", ", list.SymmetricBypass.Select(num => num.ToString())));
-            var tree = new BadTree<int>();
-            var rnd = new System.Random(1);
-            var init = Enumerable.Range(0, 10_000_000).OrderBy(x => rnd.Next()).ToArray();
-            foreach (var i in init)
-            {
-                tree.Add(i);
-            }
-            Console.WriteLine(tree.GetHeight());
-            tree.reorder_to_ideal();
-            Console.WriteLine(tree.GetHeight());
+            list._root = list.BLrot(list._root);
+            Console.WriteLine(list.Print());
+
+            //list.print();
+
+            //Console.WriteLine(list.TreeHeight);
+            //Console.WriteLine(string.Join(", ", list.SymmetricBypass.Select(num => num.ToString())));
+            //var tree = new BadTree<int>();
+            //var rnd = new System.Random(1);
+            //var init = Enumerable.Range(1, 31).OrderBy(x => rnd.Next()).ToArray();
+            //foreach (var i in init)
+            //{
+            //    tree.Add(i);
+            //}
+            //Console.WriteLine(tree.GetHeight());
+            //tree.reorder_to_ideal();
+            //Console.WriteLine(tree.GetHeight());
+
+            //Console.WriteLine(list.Print());
+            //list._root = list.Rrot(list._root);
+            //Console.WriteLine(list.Print());
+            //list._root = list.Lrot(list._root);
+            //Console.WriteLine(list.Print());
 
         }
     }
