@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Warfa\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Warfa\\.nuget\\packages"
+    ]
+  }
+}
